@@ -49,17 +49,24 @@
                                         {{--  <td></td>  --}}
                                         <td>{{$user->created_at}}</td>
                                         {{--  <td></td>  --}}
-                                        <td></td>
+                                        <td><i  class=" {{ in_array($user->id , $package_users) == true ? 'fas fa-solid fa-check' : ''}}"></i></td>
                                     </tr>
                                 @endforeach
                             @endisset
                         </tbody>
+
                     </table>
                 </div>
             </div>
             <!--col-->
         </div>
         <!--row-->
+        <div class="row justify-content-center">
+
+            {!! $users->render() !!}
+
+        </div>
+
     </div>
     <!--card-body-->
 </div>

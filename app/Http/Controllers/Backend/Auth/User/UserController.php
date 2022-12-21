@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\Auth\User\StoreUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
 use App\Http\Responses\ViewResponse;
 use App\Models\Auth\User;
+use App\Models\Auth\Package;
 use App\Repositories\Backend\Auth\PermissionRepository;
 use App\Repositories\Backend\Auth\RoleRepository;
 use App\Repositories\Backend\Auth\UserRepository;
@@ -42,9 +43,9 @@ class UserController extends Controller
      */
     public function index(ManageUserRequest $request)
     {
-        $users = User::where('id','!=',1)->get();
-       
-        return view('backend.auth.user.index',compact('users'));
+        $users = User::where('id','!=',1)->paginate(10);
+        $package_users = Package::all()->pluck('user_id')->toArray();
+        return view('backend.auth.user.index',compact('users','package_users'));
     }
 
     /**

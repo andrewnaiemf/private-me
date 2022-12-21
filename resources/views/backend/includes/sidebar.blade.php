@@ -16,9 +16,7 @@
                     @lang('menus.backend.sidebar.system')
                 </li>  --}}
 
-                <li class="nav-item nav-dropdown {{
-                    active_class(Route::is('admin/auth*'), 'open')
-                }}">
+                <li class="nav-item nav-dropdown {{active_class(Route::is('admin/auth*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle {{
                         active_class(Route::is('admin/auth*'))
                     }}" data-bs-toggle="collapse" href="#collapseExamplea" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -60,6 +58,53 @@
                     </ul>
                     </div>
                 </li>
+
+                <li class="divider"></li>
+
+
+                <li class="nav-item nav-dropdown {{active_class(Route::is('admin/package*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{
+                        active_class(Route::is('admin/package*'))
+                    }}" data-bs-toggle="collapse" href="#package" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="nav-icon far fa-bar"></i>
+                        @lang('menus.backend.access.title')
+
+                        @if ($pending_approval > 0)
+                            <span class="badge badge-danger">{{ $pending_approval }}</span>
+                        @endif
+                    </a>
+                    <div class="collapse" id="package">
+                    <ul class="">
+                        <li class="">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/package*'))
+                            }}" href="{{ route('admin.auth.user.index') }}" >
+                                @lang('labels.backend.access.users.package')
+
+                                @if ($pending_approval > 0)
+                                    <span class="badge badge-danger">{{ $pending_approval }}</span>
+                                @endif
+                            </a>
+                        </li>
+                        {{--  <li class="nav-item">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/role*'))
+                            }}" href="{{ route('admin.auth.role.index') }}">
+                                @lang('labels.backend.access.roles.management')
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/permission*'))
+                            }}" href="{{ route('admin.auth.permission.index') }}">
+                                @lang('labels.backend.access.permissions.management')
+                            </a>
+                        </li>  --}}
+                    </ul>
+                    </div>
+                </li>
+
 
                 <li class="divider"></li>
 

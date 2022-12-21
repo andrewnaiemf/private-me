@@ -5,6 +5,7 @@
 
             <div class="dropdown-menu" aria-labelledby="breadcrumb-dropdown-1">
                 <a class="dropdown-item" href="{{ route('admin.auth.user.index') }}">@lang('menus.backend.access.users.active')</a>
+                <a class="dropdown-item" href="{{ route('admin.auth.package.index') }}">@lang('menus.backend.access.packages.active')</a>
                 <a class="dropdown-item" href="{{ route('admin.auth.user.create') }}">@lang('menus.backend.access.users.create')</a>
                 <a class="dropdown-item" href="{{ route('admin.auth.user.deactivated') }}">@lang('menus.backend.access.users.deactivated')</a>
                 <a class="dropdown-item" href="{{ route('admin.auth.user.deleted') }}">@lang('menus.backend.access.users.deleted')</a>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Auth\Role\RoleController;
 use App\Http\Controllers\Backend\Auth\User\UserConfirmationController;
 use App\Http\Controllers\Backend\Auth\User\UserController;
+use App\Http\Controllers\Backend\Auth\User\PackageController;
 use App\Http\Controllers\Backend\Auth\User\UserPasswordController;
 use App\Http\Controllers\Backend\Auth\User\UserSessionController;
 use App\Http\Controllers\Backend\Auth\User\UserSocialController;
@@ -64,6 +65,10 @@ Route::group([
             Route::delete('delete-permanently', [UserStatusController::class, 'delete'])->name('user.delete-permanently');
             Route::post('restore', [UserStatusController::class, 'restore'])->name('user.restore');
         });
+
+        Route::get('package', [PackageController::class, 'index'])->name('package.index');
+
+
     });
 
     // Role Management

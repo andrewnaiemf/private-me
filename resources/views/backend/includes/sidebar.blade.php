@@ -66,8 +66,8 @@
                     <a class="nav-link nav-dropdown-toggle {{
                         active_class(Route::is('admin/package*'))
                     }}" data-bs-toggle="collapse" href="#package" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="nav-icon far fa-bar"></i>
-                        @lang('menus.backend.access.title')
+                        <i class="nav-icon fas fa-bars"></i>
+                        @lang('menus.backend.access.packages.title')
 
                         @if ($pending_approval > 0)
                             <span class="badge badge-danger">{{ $pending_approval }}</span>
@@ -78,8 +78,8 @@
                         <li class="">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/auth/package*'))
-                            }}" href="{{ route('admin.auth.user.index') }}" >
-                                @lang('labels.backend.access.users.package')
+                            }}" href="{{ route('admin.auth.package.index') }}" >
+                                @lang('menus.backend.access.packages.all')
 
                                 @if ($pending_approval > 0)
                                     <span class="badge badge-danger">{{ $pending_approval }}</span>

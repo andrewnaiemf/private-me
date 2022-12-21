@@ -21,6 +21,9 @@ return [
                 'no_deleted' => 'لا يوجد مستخدمين محذوفين.',
                 'restore_user_confirm' => 'هل تريد استعادة هذا المستخدم إلى حالته الأصلية؟',
             ],
+            'packages' => [
+                
+            ]
         ],
 
         'dashboard' => [

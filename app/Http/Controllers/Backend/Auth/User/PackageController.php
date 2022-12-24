@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Auth\Plan;
+use App\Models\Auth\User;
 
 class PackageController extends Controller
 {
@@ -48,7 +49,9 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::where('plan_id',$id)->paginate(10);
+        return view('backend.auth.user.package.index',compact('users'));
+
     }
 
     /**

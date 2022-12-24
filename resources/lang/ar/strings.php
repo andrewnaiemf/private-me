@@ -29,6 +29,9 @@ return [
         'dashboard' => [
             'title' => 'لوحة تحكم الإدارة',
             'welcome' => 'أهلاً وسهلاً',
+            'users' => 'مستخدم',
+            'package1' => 'اساسية',
+            'package2' => '',
         ],
 
         'general' => [

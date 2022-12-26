@@ -67,6 +67,8 @@ Route::group([
         });
 
         Route::get('package', [PackageController::class, 'index'])->name('package.index');
+        Route::get('package/create', [PackageController::class, 'create'])->name('package.create');
+        Route::post('package/store', [PackageController::class, 'store'])->name('package.store');
 
 
     });

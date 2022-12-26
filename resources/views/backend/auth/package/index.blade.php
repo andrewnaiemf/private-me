@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    {{ __('menus.backend.access.packages.all') }} 
+                    {{ __('menus.backend.access.packages.all') }}
                     {{--  <small class="text-muted">{{ __('labels.backend.access.users.active') }}</small>  --}}
                 </h4>
             </div>
@@ -32,7 +32,7 @@
                                 <th>@lang('labels.backend.access.packages.table.price-month')</th>
                                 <th>@lang('labels.backend.access.packages.table.storage')</th>
                                 <th>@lang('labels.backend.access.packages.table.free-storage')</th>
-                                <th>@lang('labels.backend.access.packages.table.chat')</th>
+{{--                                <th>@lang('labels.backend.access.packages.table.chat')</th>--}}
                                 {{--  <th>@lang('labels.backend.access.users.table.confirmed')</th>  --}}
                                 {{--  <th>@lang('labels.backend.access.users.table.roles')</th>  --}}
                                 <th>@lang('labels.backend.access.packages.table.created')</th>
@@ -50,7 +50,7 @@
                                         <td>{{$package->price_month }}</td>
                                         <td>{{$package->storage }}</td>
                                         <td>{{$package->free_storage }}</td>
-                                        <td>{{$package->chat }}</td>
+{{--                                        <td>{{$package->chat }}</td>--}}
                                         <td>{{$package->created_at }}</td>
                                        
                                     </tr>

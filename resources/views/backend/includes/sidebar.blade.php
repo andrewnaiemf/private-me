@@ -86,6 +86,17 @@
                                 @endif
                             </a>
                         </li>
+                        <li class="">
+                            <a class="nav-link {{
+                                active_class(Route::is('admin/auth/package*'))
+                            }}" href="{{ route('admin.auth.package.create') }}" >
+                                إضافة باقة
+
+                                @if ($pending_approval > 0)
+                                    <span class="badge badge-danger">{{ $pending_approval }}</span>
+                                @endif
+                            </a>
+                        </li>
                         {{--  <li class="nav-item">
                             <a class="nav-link {{
                                 active_class(Route::is('admin/auth/role*'))

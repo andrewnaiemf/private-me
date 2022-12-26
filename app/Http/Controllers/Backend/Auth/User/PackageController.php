@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auth\Package;
 use Illuminate\Http\Request;
 use App\Models\Auth\Plan;
 use App\Models\Auth\User;
@@ -27,7 +28,8 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.auth.package.create');
+
     }
 
     /**
@@ -38,7 +40,31 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "name" => 'required',
+//            "duration" => 'required',
+            "description" => 'required',
+            "price_year" => 'required',
+            "price_month" => 'required',
+            "storage" => 'required',
+            "free_storage" => 'required',
+//            "chat" => 'required',
+//            "friends" => 'required',
+        ]);
+
+        Plan::create([
+            'name' => $request->name ,
+            'description' => $request->description ,
+            'price_year' => $request->price_year ,
+            'price_month' => $request->price_month ,
+            'storage' => $request->storage ,
+            'free_storage' =>$request->free_storage,
+            'chat' => 'Available',
+            'friends' => -1,
+            'duration' => 'duration',
+
+        ]);
+        return redirect('/admin/auth/package');
     }
 
     /**
@@ -47,9 +73,20 @@ class PackageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$type)
     {
-        $users = User::where('plan_id',$id)->paginate(10);
+
+        $plan= Plan::find($id);
+
+        if($type == 'm'){
+            $price = $plan->price_month;
+        }else{
+            $price = $plan->price_year;
+        }
+
+        $users_subscribe = Package::where('price',$price)->pluck('user_id');
+        $users = User::whereIn('id',$users_subscribe)->paginate(10);
+
         return view('backend.auth.user.package.index',compact('users'));
 
     }

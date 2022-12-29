@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\Auth\User\StoreUserRequest;
 use App\Http\Requests\Backend\Auth\User\UpdateUserRequest;
 use App\Http\Requests\Backend\Api\ApiRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Auth\Advertisement;
 use App\Models\Auth\User;
 use App\Models\Auth\Package;
 use Illuminate\Http\Request;
@@ -637,8 +638,7 @@ class UserController extends APIController
          case '2':
              $message_type = 'video';
              break;
-         
-             
+
          case '3':
              $message_type = 'image';
              break;
@@ -729,9 +729,12 @@ class UserController extends APIController
 
 
     //////////////////////get all messasges///////////////////
+    /// الاصدفاء و نفس الوقت مشتركين ف باقه
     public function getMessages(ApiRequest $request){
 
-        $messagses = Message::where(['user_id' => auth()->user()->id])->with('friend')
+        $subscribed_friends = Package::pluck('user_id');
+
+        $messagses = Message::where(['user_id' => auth()->user()->id])->whereIn('friend_id' , $subscribed_friends  )->with('friend')
             // ->orderBy('id', 'DESC')
             // ->orderBy('is_read', 'ASC')
             ->get();
@@ -767,6 +770,12 @@ class UserController extends APIController
        
 
         return response()->json(["msg" => "wrong id", "success" => true]);
+
+    }
+
+    public function advertisements(){
+        $advertisements = Advertisement::all();
+        return response()->json(["success" => true, "advertisements" => $advertisements]);
 
     }
 

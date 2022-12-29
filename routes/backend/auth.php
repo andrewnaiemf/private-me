@@ -8,7 +8,7 @@ use App\Http\Controllers\Backend\Auth\User\UserPasswordController;
 use App\Http\Controllers\Backend\Auth\User\UserSessionController;
 use App\Http\Controllers\Backend\Auth\User\UserSocialController;
 use App\Http\Controllers\Backend\Auth\User\UserStatusController;
-
+use App\Http\Controllers\Backend\Auth\User\AdvertisementController;
 // All route names are prefixed with 'admin.auth'.
 Route::group([
     'prefix' => 'auth',
@@ -69,7 +69,10 @@ Route::group([
         Route::get('package', [PackageController::class, 'index'])->name('package.index');
         Route::get('package/create', [PackageController::class, 'create'])->name('package.create');
         Route::post('package/store', [PackageController::class, 'store'])->name('package.store');
-
+        Route::get('advertisement/create', [AdvertisementController::class, 'create'])->name('advertisement.create');
+        Route::post('advertisement/store', [AdvertisementController::class, 'store'])->name('package.store');
+        Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
+        Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'destroy'])->name('advertisement.destroy');
 
     });
 

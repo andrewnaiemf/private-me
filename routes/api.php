@@ -73,6 +73,8 @@ Route::group(['namespace' => 'Api\V1', 'prefix' => 'v1', 'as' => 'v1.'], functio
         Route::get('readMessage/{id}', 'UserController@readMessage');
         Route::post('deleteMessage', 'UserController@deleteMessage');
 
+        Route::get('advertisements', 'UserController@advertisements');
+
     });
 
     // forgot & reset password

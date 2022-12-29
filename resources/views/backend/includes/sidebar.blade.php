@@ -119,6 +119,47 @@
 
                 <li class="divider"></li>
 
+
+                <li class="nav-item nav-dropdown {{active_class(Route::is('admin/advertisements*'), 'open') }}">
+                    <a class="nav-link nav-dropdown-toggle {{
+                        active_class(Route::is('admin/advertisements*'))
+                    }}" data-bs-toggle="collapse" href="#advertisements" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="nav-icon fas fa-ad"></i>
+                        إدارة الاعلانات
+
+                        @if ($pending_approval > 0)
+                            <span class="badge badge-danger">{{ $pending_approval }}</span>
+                        @endif
+                    </a>
+                    <div class="collapse" id="advertisements">
+                        <ul class="">
+                            <li class="">
+                                <a class="nav-link {{
+                                active_class(Route::is('admin/auth/advertisements*'))
+                            }}" href="{{ route('admin.auth.advertisement.index') }}" >
+                                    جميع الاعلانات
+
+                                    @if ($pending_approval > 0)
+                                        <span class="badge badge-danger">{{ $pending_approval }}</span>
+                                    @endif
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link {{
+                                active_class(Route::is('admin/auth/advertisements*'))
+                            }}" href="{{ route('admin.auth.advertisement.create') }}" >
+                                    إضافة اعلان
+
+                                    @if ($pending_approval > 0)
+                                        <span class="badge badge-danger">{{ $pending_approval }}</span>
+                                    @endif
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
                 {{--  <li class="nav-item nav-dropdown {{
                     active_class(Route::is('admin/log-viewer*'), 'open') }}">
                         <a class="nav-link nav-dropdown-toggle {{

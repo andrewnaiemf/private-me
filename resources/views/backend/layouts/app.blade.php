@@ -16,7 +16,7 @@
 
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
-    {{ style(mix('css/backend.css')) }}
+    {{ style(mix('/css/backend.css')) }}
 
     <style>
         .hidden {

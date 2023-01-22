@@ -39,6 +39,6 @@
 if (!isset($c->id))
     $c->id = 6;
 ?>
- <script src="https://eu-test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script>
-<!--<script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> -->
+<!--<script src="https://eu-test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script>-->
+<script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> 
 @endsection

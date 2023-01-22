@@ -3951,6 +3951,10 @@
             "rest",
             "web service"
         ],
+        "support": {
+            "issues": "https://github.com/guzzle/guzzle/issues",
+            "source": "https://github.com/guzzle/guzzle/tree/7.5.0"
+        },
         "funding": [
             {
                 "url": "https://github.com/GrahamCampbell",
@@ -4154,6 +4158,10 @@
             "uri",
             "url"
         ],
+        "support": {
+            "issues": "https://github.com/guzzle/psr7/issues",
+            "source": "https://github.com/guzzle/psr7/tree/2.4.3"
+        },
         "funding": [
             {
                 "url": "https://github.com/GrahamCampbell",
@@ -6938,7 +6946,11 @@
             "pki",
             "ssl",
             "tls"
-        ]
+        ],
+        "support": {
+            "issues": "https://github.com/paragonie/certainty/issues",
+            "source": "https://github.com/paragonie/certainty/tree/v2.8.2"
+        }
     },
     {
         "name": "paragonie/constant_time_encoding",

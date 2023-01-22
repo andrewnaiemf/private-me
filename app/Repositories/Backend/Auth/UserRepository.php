@@ -462,7 +462,7 @@ class UserRepository extends BaseRepository
 
         if (isset($img)) {
             $path = $img->storePublicly('public/profile_photo');
-            $user['avatar_location'] = str_replace("public", "storage", $path);
+            $user['avatar_location'] = str_replace("public", "public/storage", $path);
         }
 
         return DB::transaction(function () use ($user, $data, $roles, $permissions) {
@@ -507,8 +507,9 @@ class UserRepository extends BaseRepository
 
         if (isset($img)) {
             $path = $img->storePublicly('public/profile_photo');
-            $data['avatar_location'] = str_replace("public", "storage", $path);
+            $data['avatar_location'] = str_replace("public", "public/storage", $path);
         }
+       
 
         return DB::transaction(function () use ($user, $data, $roles, $permissions) {
             if (isset($data['question_id'])) {

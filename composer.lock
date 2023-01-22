@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f5247709bb7129d6b4a1896ea577fe3",
+    "content-hash": "ee9f803aa3a130c12e720b5f8fde4d39",
     "packages": [
         {
             "name": "albertcht/invisible-recaptcha",
@@ -1684,6 +1684,10 @@
                 "rest",
                 "web service"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/7.5.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -1883,6 +1887,10 @@
                 "uri",
                 "url"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/2.4.3"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -4022,6 +4030,10 @@
                 "ssl",
                 "tls"
             ],
+            "support": {
+                "issues": "https://github.com/paragonie/certainty/issues",
+                "source": "https://github.com/paragonie/certainty/tree/v2.8.2"
+            },
             "time": "2021-10-04T08:25:35+00:00"
         },
         {
@@ -13693,7 +13705,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

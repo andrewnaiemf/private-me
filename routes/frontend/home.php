@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
 
 Route::get('req', 'HomeController@request');
 Route::get('payment/{price}/{plan_id}/{plan_type}/{user_id}', 'HomeController@payment')->name('payment');
-Route::get('apple/payment/{price}', 'HomeController@applePayment')->name('apple.payment');
+Route::get('apple/payment/{price}/{plan_id}/{plan_type}/{user_id}', 'HomeController@applePayment')->name('apple.payment');
 Route::get('mada/payment/{price}/{plan_id}/{plan_type}/{user_id}', 'HomeController@madaPayment')->name('mada.payment');
 Route::get('payment-status', 'HomeController@checkStatus')->name('payment.status');
 Route::get('payment-mada-status', 'HomeController@checkMadaStatus')->name('payment.mada.status');

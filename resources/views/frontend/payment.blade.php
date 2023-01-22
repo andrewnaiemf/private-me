@@ -43,8 +43,8 @@ if (!isset($c->id))
 ?>
 
 
-<script src="https://eu-test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> 
-{{-- <script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> --}}
+{{--  <script src="https://eu-test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script>   --}}
+<script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> 
 
 <!-- <script src="https://eu-test.oppwa.com/v1/paymentWidgets.js"></script>
 <script>

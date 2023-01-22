@@ -247,7 +247,7 @@ class UserController extends APIController
                                 continue;
                             }
                             $file_ = asset($link . $fil . '/' . ($internal_file ?? null)); // because [0] = "." [1] = ".." 
-                            array_push($all_files, array('file' => $file_, 'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
+                            array_push($all_files, array('file' => 'https://app.privatemesa.com'.$file_, 'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
                         }
 
                         // array_push($files, array('file' => $fil, 'link' => asset($link . $fil), 'count' => $filecount, 'files' => $all_files, 'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
@@ -287,16 +287,16 @@ class UserController extends APIController
 
                         // return 4 files from directory
                         $internal_files = scandir($directory);
-                        $file_1 = asset($link . $fil . '/' . ($internal_files[2] ?? null)); // because [0] = "." [1] = ".." 
-                        $file_2 = asset($link . $fil . '/' . ($internal_files[3] ?? null));
-                        $file_3 = asset($link . $fil . '/' . ($internal_files[4] ?? null));
-                        $file_4 = asset($link . $fil . '/' . ($internal_files[5] ?? null));
+                        $file_1 = 'https://app.privatemesa.com'.asset($link . $fil . '/' . ($internal_files[2] ?? null)); // because [0] = "." [1] = ".." 
+                        $file_2 = 'https://app.privatemesa.com'.asset($link . $fil . '/' . ($internal_files[3] ?? null));
+                        $file_3 = 'https://app.privatemesa.com'.asset($link . $fil . '/' . ($internal_files[4] ?? null));
+                        $file_4 = 'https://app.privatemesa.com'.asset($link . $fil . '/' . ($internal_files[5] ?? null));
 
                         $four_files = [$file_1, $file_2, $file_3, $file_4];
-                        array_push($files, array('file' => $fil, 'link' => asset($link . $fil), 'count' => $filecount, 'internal_files' => $four_files, 'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
+                        array_push($files, array('file' => $fil, 'link' => 'https://app.privatemesa.com'.asset($link . $fil), 'count' => $filecount, 'internal_files' => $four_files, 'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
                     } else {
                         $filecount = 0;
-                        array_push($files, array('file' => $fil, 'link' => asset($link . $fil), 'count' => 0, 'internal_files' => [],  'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
+                        array_push($files, array('file' => $fil, 'link' => 'https://app.privatemesa.com'.asset($link . $fil), 'count' => 0, 'internal_files' => [],  'date' => date("F d Y H:i:s.", filemtime($file . '/' . $fil))));
                     }
 
                     $count++;
@@ -356,10 +356,14 @@ class UserController extends APIController
         $files_count = $this->repository->getInternalFilesCount($files_path);
         $videos_count = $this->repository->getInternalFilesCount($videos_path);
 
+        $advertisements = Advertisement::all();
+
+
         return response()->json([
             "images" => $images_count,
             "files" => $files_count,
             "videos" => $videos_count,
+            "advertisements" =>  $advertisements,
             "friends" => count(auth()->user()->getMyFriends())
         ]);
     }
@@ -474,7 +478,8 @@ class UserController extends APIController
     {
         $user = auth()->user();
         $user_id = $user->id;
-        
+        $password = $request->input('password');
+
         if (!\Hash::check($password, auth()->user()->password)) {
             throw new GeneralException(__('exceptions.backend.access.users.delete_error'));
         }
@@ -557,14 +562,14 @@ class UserController extends APIController
         switch ($request['brand_id']) {
 
             case '2':
-                $url = "https://app.private-me.net/mada/payment/";
+                $url = "https://app.privatemesa.com/mada/payment/";
                 break;
             case '3':
-                $url = "https://app.private-me.net/apple/payment/";
+                $url = "https://app.privatemesa.com/apple/payment/";
                 break;
             
             default:
-                $url = "https://app.private-me.net/payment/";
+                $url = "https://app.privatemesa.com/payment/";
                 break;
         }
 
@@ -606,7 +611,7 @@ class UserController extends APIController
         $message = Message::where([
             'user_id'=>auth()->user()->id,
             'friend_id'=>$request->friendId,
-            'is_read'=>0
+            // 'is_read'=>0
             ])->first();
 
         if(! isset( $message ) ){
@@ -734,7 +739,7 @@ class UserController extends APIController
 
         $subscribed_friends = Package::pluck('user_id');
 
-        $messagses = Message::where(['user_id' => auth()->user()->id])->whereIn('friend_id' , $subscribed_friends  )->with('friend')
+        $messagses = Message::where(['friend_id' => auth()->user()->id ])->whereIn('friend_id' , $subscribed_friends  )->whereIn('user_id' , $subscribed_friends  )->with('friend')
             // ->orderBy('id', 'DESC')
             // ->orderBy('is_read', 'ASC')
             ->get();

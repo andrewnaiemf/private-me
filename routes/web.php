@@ -44,3 +44,15 @@ Route::get('link-storage', function () {
 });
 
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('frontend.auth.password.reset.form');
+Route::get('/privacy-en', function () {
+    $file = file_get_contents('/var/www/app.privatemesa.com/privacy-en.html', true);
+return <<<HTML
+{$file}
+HTML;
+});
+Route::get('/privacy-ar', function () {
+    $file = file_get_contents('/var/www/app.privatemesa.com/privacy-ar.html', true);
+return <<<HTML
+{$file}
+HTML;
+});

@@ -28,7 +28,11 @@
             <!-- Single Blog Post -->
             <div class="col-12 text-center">
                 <?php $result = json_decode($responseData); ?>
-                <div class="h1">{{$result->result->description}}</div>
+                @if ($result->result->code != "200.300.404")
+                    <div class="h1">{{$result->result->description}}</div>
+                @else
+                    <div class="h1">لقد اتممت عملية الدفع منذ 30 دقيقة</div>
+                @endif
             </div>
             <br />
             <!-- <a href="{{route('frontend.index')}}" class="btn btn-success btn-lg">Reurn To Home</a> -->

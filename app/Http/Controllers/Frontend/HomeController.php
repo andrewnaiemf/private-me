@@ -44,7 +44,7 @@ class HomeController extends Controller
             "&currency=SAR" .
             "&paymentType=DB" .
             // "&testMode=EXTERNAL" .
-            "&merchantTransactionId=" . $marchant_id . "" .
+            "&merchantTransactionId=" . $marchant_id .time() . "" .
             "&billing.street1= Althwora ST" .
             "&billing.city=jaddah" .
             "&billing.state= city" .
@@ -59,7 +59,7 @@ class HomeController extends Controller
         ));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -78,9 +78,9 @@ class HomeController extends Controller
         // test mode: "entityId=8ac7a4c980447ded01804683f748089b"
 
         $user = auth()->user();
-        $url = "https://eu-test.oppwa.com/v1/checkouts";
-        // $url = "https://eu-prod.oppwa.com/v1/checkouts";
-        $data = "entityId=8ac7a4c980447ded01804683f748089b" .
+        // $url = "https://eu-test.oppwa.com/v1/checkouts";
+        $url = "https://eu-prod.oppwa.com/v1/checkouts";
+        $data = "entityId=8acda4ca83ceb2a10183ef0fb9325679" .
             "&amount=$price" .
             "&currency=SAR" .
             "&paymentType=DB" .
@@ -103,18 +103,18 @@ class HomeController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Yzk4MDQ0N2RlZDAxODA0NjgzMjRiMTA4NzN8RUpjWng3QVBtMg=='
+            'Authorization:Bearer OGFjZGE0Y2E4M2NlYjJhMTAxODNlZjBlNTdkMTU2NjV8UHh6Y2JYNkJuYQ=='
         ));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
             return curl_error($ch);
         }
         curl_close($ch);
-
+        // dd($responseData);
         return view('frontend.mada-payment', ["response" => $responseData, "price" => $price]);
     }
 
@@ -134,9 +134,9 @@ class HomeController extends Controller
        $marchant_id = 79436896546;
        // live mode: "entityId=8acda4ca83ceb2a10183ef0f0fbd566f"
        // test mode: "entityId=8ac7a4c980447ded01804683885c0897"
-       $url = "https://eu-test.oppwa.com/v1/checkouts";
-       // $url = "https://eu-prod.oppwa.com/v1/checkouts";
-       $data = "entityId=8ac7a4c980447ded01804683885c0897" .
+       //$url = "https://eu-test.oppwa.com/v1/checkouts";
+       $url = "https://eu-prod.oppwa.com/v1/checkouts";
+       $data = "entityId=8acda4ca83ceb2a10183ef0f0fbd566f" .
            "&amount=$price" .
            "&currency=SAR" .
            "&paymentType=DB" .
@@ -159,7 +159,7 @@ class HomeController extends Controller
        $ch = curl_init();
        curl_setopt($ch, CURLOPT_URL, $url);
        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-           'Authorization:Bearer OGFjN2E0Yzk4MDQ0N2RlZDAxODA0NjgzMjRiMTA4NzN8RUpjWng3QVBtMg=='
+           'Authorization:Bearer OGFjZGE0Y2E4M2NlYjJhMTAxODNlZjBlNTdkMTU2NjV8UHh6Y2JYNkJuYQ=='
        ));
        curl_setopt($ch, CURLOPT_POST, 1);
        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -181,16 +181,16 @@ class HomeController extends Controller
     function checkMadaStatus(Request $request)
     {
 
-        // $url = "https://eu-prod.oppwa.com/v1/checkouts/$request->id/payment";
-        $url = "https://eu-test.oppwa.com/v1/checkouts/$request->id/payment";
+        $url = "https://eu-prod.oppwa.com/v1/checkouts/$request->id/payment";
+        // $url = "https://eu-test.oppwa.com/v1/checkouts/$request->id/payment";
 
-        $url .= "?entityId=8ac7a4c980447ded01804683f748089b";
+        $url .= "?entityId=8acda4ca83ceb2a10183ef0fb9325679";
 
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Yzk4MDQ0N2RlZDAxODA0NjgzMjRiMTA4NzN8RUpjWng3QVBtMg=='
+            'Authorization:Bearer OGFjZGE0Y2E4M2NlYjJhMTAxODNlZjBlNTdkMTU2NjV8UHh6Y2JYNkJuYQ=='
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production
@@ -225,24 +225,22 @@ class HomeController extends Controller
                     $user->plan_id = $response_data->customParameters->planId;
                     $user->save();
                 }
-
-    
             }
         return view('frontend.after_payment', ["responseData" => $responseData]);
     }
 
     function checkStatus(Request $request)
     {
-        // $url = "https://eu-prod.oppwa.com/v1/checkouts/$request->id/payment";
-        $url = "https://eu-test.oppwa.com/v1/checkouts/$request->id/payment";
+        $url = "https://eu-prod.oppwa.com/v1/checkouts/$request->id/payment";
+        // $url = "https://eu-test.oppwa.com/v1/checkouts/$request->id/payment";
 
-        $url .= "?entityId=8ac7a4c980447ded01804683885c0897";
+        $url .= "?entityId=8acda4ca83ceb2a10183ef0f0fbd566f";
 
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Yzk4MDQ0N2RlZDAxODA0NjgzMjRiMTA4NzN8RUpjWng3QVBtMg=='
+            'Authorization:Bearer OGFjZGE0Y2E4M2NlYjJhMTAxODNlZjBlNTdkMTU2NjV8UHh6Y2JYNkJuYQ=='
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production

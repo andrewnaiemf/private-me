@@ -76,7 +76,7 @@ class UserController extends APIController
             $senderName = User::find(auth()->user()->id)->first_name;
             $msg = $senderName .' send to you a friend request .' ; 
             $notificationType = 'friendRequest'; 
-            $this->sendWebNotification($notificationType , $reciever , $msg);
+            $this->sendWebNotification($senderName , $notificationType , $reciever , $msg);
 
 
             return response()->json(["msg" => "wait for acceptance", "success" => false]);
@@ -96,7 +96,7 @@ class UserController extends APIController
              $senderName = User::find(auth()->user()->id)->first_name;
              $msg ='You and '. $senderName .' become friends .' ; 
              $notificationType = 'acceptFriendRequest'; 
-             $this->sendWebNotification($notificationType , $reciever, $msg);
+             $this->sendWebNotification($senderName , $notificationType , $reciever , $msg);
 
 
             return response()->json(["msg" => "you become friends", "success" => true]);
@@ -114,7 +114,7 @@ class UserController extends APIController
          $senderName = User::find(auth()->user()->id)->first_name;
          $msg = $senderName .' cancel your friend request .' ; 
          $notificationType = 'acceptFriendRequest'; 
-         $this->sendWebNotification($notificationType , $reciever, $msg);
+         $this->sendWebNotification($senderName , $notificationType , $reciever , $msg);
 
         return response()->json(["msg" => "you canceled friendship", "success" => true]);
     }
@@ -653,7 +653,7 @@ class UserController extends APIController
              break;
          
          default:
-             $message_type =  substr($message->msg, 0, 5).'....';
+             $message_type =  $message->msg;
              break;
         }
  
@@ -662,7 +662,7 @@ class UserController extends APIController
 
         $msg =  $userName.' send you '.$message_type;
         $notificationType = 'message'; 
-        $this->sendWebNotification($notificationType , $reciever, $msg);
+        $this->sendWebNotification($userName , $notificationType , $reciever , $msg);
 
 
         return response()->json(["msg" => "message sent successfully", "success" => true]);
@@ -671,7 +671,7 @@ class UserController extends APIController
     //////////////////////////////////////
 
 
-    public function sendWebNotification($notificationType , $reciever , $message)
+    public function sendWebNotification($userName ,$notificationType , $reciever , $message)
     {
 
         $url = 'https://fcm.googleapis.com/fcm/send';
@@ -693,7 +693,6 @@ class UserController extends APIController
            array_push($devs, $device);
        }
 
-      
         $data = [
             "registration_ids" =>array_values( $devs),
             "notification" => [

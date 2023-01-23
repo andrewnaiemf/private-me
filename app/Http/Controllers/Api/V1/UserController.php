@@ -629,7 +629,11 @@ class UserController extends APIController
 
 
         }else{
-            $message->update(['msg'=>$request->msg,'firebase_id'=>strtotime($request->firebase_id)]);
+            $message->update([
+                'msg'=>$request->msg,
+                'firebase_id'=>strtotime($request->firebase_id),
+                'type'=>$request->type
+            ]);
         }
 
         $type = $message->type;

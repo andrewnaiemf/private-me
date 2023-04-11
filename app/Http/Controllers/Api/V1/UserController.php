@@ -122,6 +122,7 @@ class UserController extends APIController
     public function checkFriendRequest(ApiRequest $request)
     {
         $friend_request = $this->repository->checkFriendRequest();
+        // $friend_request['subscribed'] = 0;
         return $friend_request;
     }
 

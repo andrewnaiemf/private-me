@@ -3,7 +3,10 @@
 @section('title', app_name() . ' | ' . 'Payment')
 
 @section('content')
-
+<?php $c = json_decode($response);
+if (!isset($c->id))
+    $c->id = 6;
+?>
 <!-- ##### Welcome Area Start ##### -->
 <div class="breadcumb-area clearfix auto-init">
     <!-- breadcumb content -->
@@ -29,15 +32,13 @@
             <div class="col-12 text-center">
                 <div class="h1">Total price: {{$price}} SAR</div>
             </div>
-            <form action="{{route('frontend.payment.status')}}" class="paymentWidgets" data-brands="APPLEPAY"></form>
+            <form action="{{route('frontend.payment.apple.status')}}" class="paymentWidgets" data-brands="APPLEPAY"></form>
 
         </div>
     </div>
 </section>
 <!-- ##### Blog Area End ##### -->
 
-<!-- <script src="https://eu-test.oppwa.com/v1/paymentWidgets.js"></script> -->
-<script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js"></script>
 <script>
     var wpwlOptions = {
         applePay: {
@@ -48,4 +49,6 @@
         }
     }
 </script>
+<script src="https://eu-prod.oppwa.com/v1/paymentWidgets.js?checkoutId={{$c->id}}"></script> 
+
 @endsection

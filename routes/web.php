@@ -56,3 +56,8 @@ return <<<HTML
 {$file}
 HTML;
 });
+
+
+Route::get('/.well-known/apple-developer-merchantid-domain-association.txt', function () {
+   return file_get_contents("/var/www/app.privatemesa.com/.well-known/apple-developer-merchantid-domain-association.txt", "r");
+});

@@ -211,6 +211,8 @@ class UserRepository extends BaseRepository
     public function checkFriendRequest()
     {
         $user = auth()->user();
+        $package = Package::where(["user_id" => $user->id])->first();
+        
         // people send freind request to me and i have not accept yet, and people who i request and they accept my request
         $freiends_requeset = Frindship::where('second_user_id', auth()->user()->id)
             ->whereIn('accept', [0 , 1 ,-1])
@@ -280,6 +282,7 @@ class UserRepository extends BaseRepository
                     $arr[$key]['is_read'] = $is_read[$key];
                 // }
             }
+            $arr[$key]['is_subscribed'] = isset($package) ? true : false;
         }
         return $arr;
     }

@@ -42,3 +42,4 @@ Route::get('apple/payment/{price}/{plan_id}/{plan_type}/{user_id}', 'HomeControl
 Route::get('mada/payment/{price}/{plan_id}/{plan_type}/{user_id}', 'HomeController@madaPayment')->name('mada.payment');
 Route::get('payment-status', 'HomeController@checkStatus')->name('payment.status');
 Route::get('payment-mada-status', 'HomeController@checkMadaStatus')->name('payment.mada.status');
+Route::get('payment-apple-status', 'HomeController@checkApplePayStatus')->name('payment.apple.status');
